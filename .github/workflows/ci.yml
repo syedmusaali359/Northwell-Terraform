@@ -1,0 +1,43 @@
+name: terraform-ECS(FARGATE)
+
+on:
+  push:
+    branches: ["master"]
+env: 
+    AWS_REGION: "us-east-1"
+    ACCOUNT_ID: "003718499156"
+    bucket: "northwell-ecs-backend"
+    key: "northwell-ecs-backend.tfstate"
+permissions:
+      id-token: write
+      contents: read
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v1
+      with:
+        terraform_version: 1.0.0
+
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        role-to-assume: arn:aws:iam::${{ env.ACCOUNT_ID}}:role/gh-actions-role-northwell
+        role-session-name: northwell
+        aws-region: ${{ env.AWS_REGION}}
+
+    - name: Terraform Init
+      run: terraform init -backend-config="bucket=${bucket}" -backend-config="key=${key}" -backend-config="region=${AWS_REGION}" 
+      working-directory: terraform/env/
+
+    - name: Terraform apply
+      run: terraform apply -var-file=dev.tfvars  -auto-approve -lock=false
+      working-directory: terraform/env/
+
+  
+ 
