@@ -1,13 +1,5 @@
-provider "aws" {
-    region = "us-east-1"
-    profile = "default"
-}
-
 terraform {
   backend "s3" {
-    bucket = "northwell-ecs-backend"
-    key    = "northwell-ecs-backend.tfstate"
-    region = "us-east-1"
   }
 }
 
