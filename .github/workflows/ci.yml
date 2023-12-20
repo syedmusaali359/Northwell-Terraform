@@ -36,7 +36,7 @@ jobs:
       working-directory: terraform/env/
 
     - name: Terraform apply
-      run: terraform apply -var-file=dev.tfvars  -auto-approve -lock=false
+      run: terraform apply -var-file=dev.auto.tfvars  -auto-approve -lock=false
       working-directory: terraform/env/
 
   
