@@ -83,6 +83,9 @@ resource "aws_route_table_association" "northwell-private-subnet-route-table-ass
 
  
 resource "aws_eip" "northwell-nat-eip" {
+  tags = {
+    Name = "${var.prefix}-${var.env}-NAT-Eip"
+  }
 }
 
 resource "aws_nat_gateway" "northwell-nat-gw" {
