@@ -1,3 +1,5 @@
+prefix     = "Stickball"
+env        = "Northwell"
 #####VPC
 vpc = {
   vpc_cidr_block = "10.0.0.0/16"
@@ -27,7 +29,7 @@ ecs = {
   essential     = true
   containerport = 80
   hostport      = 80
-  desired_count = 2
+  desired_count = 1
 }
 #######ALB
 alb = {
@@ -40,8 +42,19 @@ alb = {
   healthy_threshold   = 5
   unhealthy_threshold = 5
 }
-prefix     = "Stickball"
-env        = "Northwell"
+
+#######Environments
+environments = {
+  admin    = "sb-admin"
+  server = "sb-server"
+  client    = "sb-client"
+  calculator = "sb-budget-calculator"
+  store     = "sb-online-store"
+  zillow  = "sb-zillow"
+  table         = "sb-data-filter-table"
+  money          = "sb-super-money"
+  experion = "sb-experion"
+}
 
 
 

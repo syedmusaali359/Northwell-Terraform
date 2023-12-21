@@ -1,5 +1,13 @@
+# provider "aws" {
+#     region = "us-east-1"
+#     profile = "default"
+# }
+
 terraform {
   backend "s3" {
+    # bucket  = "northwell-ecs-backend" #ft-dev-terraform-state
+    # key     = "northwell-ecs-backend.tfstate"
+    # region  = "us-east-1"
   }
 }
 
@@ -38,5 +46,23 @@ module "ECS" {
   prefix               = var.prefix
   env                  = var.env
   aws_alb_target_group = module.ALB.aws_alb_target_group
+}
+module "Admin_ECR" {
+  source               = "../module/ECR"
+  prefix               = var.prefix
+  env                  = var.env
+  environments         = var.environments.admin
+}
+module "Server_ECR" {
+  source               = "../module/ECR"
+  prefix               = var.prefix
+  env                  = var.env
+  environments         = var.environments.server
+}
+module "Client_ECR" {
+  source               = "../module/ECR"
+  prefix               = var.prefix
+  env                  = var.env
+  environments         = var.environments.client
 }
 
