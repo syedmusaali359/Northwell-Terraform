@@ -36,7 +36,7 @@ jobs:
       working-directory: terraform/env/
 
     - name: Terraform destory
-      run: terraform destory -auto-approve -lock=false
+      run: terraform destroy -auto-approve -lock=false
       working-directory: terraform/env/
 
     - name: Creating ECR Repository for "sb-admin"
