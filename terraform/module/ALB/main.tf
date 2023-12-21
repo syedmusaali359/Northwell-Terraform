@@ -61,7 +61,7 @@ resource "aws_lb_target_group" "northwell_admin_targetgroup" {
   }
 }
 
-resource "aws_lb_listener" "aws_northwell_alb_listener" {
+resource "aws_lb_listener" "aws_northwell_alb_admin_listener" {
   load_balancer_arn = aws_lb.aws_northwell_alb.arn
   port              = var.alb.admin_port
   protocol          = "HTTP"
