@@ -38,3 +38,6 @@ jobs:
     - name: Terraform Apply
       run: terraform apply -auto-approve -lock=false
       working-directory: terraform/env/
+
+    - name: Creating ECR Repository for "sb-admin"
+      run: aws ecr create-repository --repository-name northwell-admin
