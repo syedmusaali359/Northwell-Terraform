@@ -49,20 +49,17 @@ module "ECS" {
 }
 module "Admin_ECR" {
   source               = "../module/ECR"
-  prefix               = var.prefix
-  env                  = var.env
+  env                  = var.environments.env
   environments         = var.environments.admin
 }
 module "Server_ECR" {
   source               = "../module/ECR"
-  prefix               = var.prefix
-  env                  = var.env
+  env                  = var.environments.env
   environments         = var.environments.server
 }
 module "Client_ECR" {
   source               = "../module/ECR"
-  prefix               = var.prefix
-  env                  = var.env
+  env                  = var.environments.env
   environments         = var.environments.client
 }
 

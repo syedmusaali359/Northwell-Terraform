@@ -45,15 +45,16 @@ alb = {
 
 #######Environments
 environments = {
-  admin    = "sb-admin"
-  server = "sb-server"
-  client    = "sb-client"
+  admin      = "sb-admin"
+  server     = "sb-server"
+  client     = "sb-client"
   calculator = "sb-budget-calculator"
-  store     = "sb-online-store"
-  zillow  = "sb-zillow"
-  table         = "sb-data-filter-table"
-  money          = "sb-super-money"
-  experion = "sb-experion"
+  store      = "sb-online-store"
+  zillow     = "sb-zillow"
+  table      = "sb-data-filter-table"
+  money      = "sb-super-money"
+  experion   = "sb-experion"
+  env        = "northwell"
 }
 
 
