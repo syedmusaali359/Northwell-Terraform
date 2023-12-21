@@ -70,3 +70,33 @@ resource "aws_lb_listener" "aws_northwell_alb_admin_listener" {
     target_group_arn = aws_lb_target_group.northwell_admin_targetgroup.arn
   }
 }
+resource "aws_lb_target_group" "northwell_server_targetgroup" {
+  name        = "${var.prefix}-${var.env}-Server-TG"
+  target_type = "ip"
+  port        = var.alb.server_port
+  protocol    = "HTTP"
+  vpc_id      = var.vpc_id
+  health_check {
+    enabled             = var.alb.enabled
+    interval            = var.alb.interval
+    path                = var.alb.path
+    timeout             = var.alb.timeout
+    matcher             = var.alb.matcher
+    healthy_threshold   = var.alb.healthy_threshold
+    unhealthy_threshold = var.alb.unhealthy_threshold
+  }
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
+resource "aws_lb_listener" "aws_northwell_alb_server_listener" {
+  load_balancer_arn = aws_lb.aws_northwell_alb.arn
+  port              = var.alb.server_port
+  protocol          = "HTTP"
+  default_action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.northwell_server_targetgroup.arn
+  }
+}

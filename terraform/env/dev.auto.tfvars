@@ -38,6 +38,7 @@ ecs = {
 alb = {
   port                = 80
   admin_port          = 3000
+  server_port         = 3000
   enabled             = true
   interval            = 300
   path                = "/"
