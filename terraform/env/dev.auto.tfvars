@@ -18,6 +18,9 @@ sg = {
   egress1_cidr_blocks  = "0.0.0.0/0"
   ingress_port         = 80
   egress_port          = 0
+
+  ###sb-admin
+  ingress_port2        = 3000
 }
 
 # ######ECS
