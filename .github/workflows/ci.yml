@@ -36,5 +36,5 @@ jobs:
       working-directory: terraform/env/
 
     - name: Terraform Apply
-      run: terraform apply -auto-approve 
+      run: terraform apply -auto-approve -lock=false
       working-directory: terraform/env/
