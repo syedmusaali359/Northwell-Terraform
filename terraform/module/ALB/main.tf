@@ -41,7 +41,7 @@ resource "aws_lb_listener" "aws_northwell_alb_listener" {
 }
 
 resource "aws_lb_target_group" "northwell_admin_targetgroup" {
-  name        = "${var.prefix}-${var.env}-Admin/Server-TG"
+  name        = "${var.prefix}-${var.env}-Admin-TG"
   target_type = "ip"
   port        = var.alb.admin_port
   protocol    = "HTTP"
