@@ -42,7 +42,7 @@ resource "aws_lb_target_group" "northwell_targetgroup" {
 
 resource "aws_lb_listener_rule" "nginx_host_based_routing" {
   listener_arn = aws_lb_listener.aws_northwell_alb_listener.arn
-  priority     = 100
+  priority     = 1
 
   condition {
     host_header {
@@ -80,7 +80,7 @@ resource "aws_lb_target_group" "northwell_admin_targetgroup" {
 
 resource "aws_lb_listener_rule" "admin_host_based_routing" {
   listener_arn = aws_lb_listener.aws_northwell_alb_listener.arn
-  priority     = 100
+  priority     = 2
 
   condition {
     host_header {
