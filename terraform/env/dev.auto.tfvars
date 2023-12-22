@@ -37,7 +37,7 @@ ecs = {
   cpu           = 2048
   memory        = 4096
   essential     = true
-  containerport = 80
+  containerport = 443
   hostport      = 80
   desired_count = 1
 }
