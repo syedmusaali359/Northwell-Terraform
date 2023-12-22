@@ -35,6 +35,10 @@ jobs:
       run: terraform init -backend-config="bucket=${bucket}" -backend-config="key=${key}" -backend-config="region=${AWS_REGION}" 
       working-directory: terraform/env/
 
-    - name: Terraform Apply
-      run: terraform apply -auto-approve -lock=false
+    - name: Terraform Plan
+      run: terraform plan -auto-approve -lock=false
       working-directory: terraform/env/
+
+    # - name: Terraform Apply
+    #   run: terraform apply -auto-approve -lock=false
+    #   working-directory: terraform/env/

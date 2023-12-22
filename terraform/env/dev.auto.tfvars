@@ -13,6 +13,7 @@ sg = {
   ingress1_protocol    = "tcp"
   ingress1_cidr_blocks = "0.0.0.0/0"
   ingress2_protocol    = "tcp"
+  https_protocol    = "https"
   ingress2_cidr_blocks = "0.0.0.0/0"
   egress1_protocol     = "-1"
   egress1_cidr_blocks  = "0.0.0.0/0"

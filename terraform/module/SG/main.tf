@@ -2,6 +2,12 @@ resource "aws_security_group" "northwell-allow-tls" {
   vpc_id = var.vpc_id
 
   ingress {
+    from_port   = var.sg.https
+    to_port     = var.sg.https
+    protocol    = var.sg.https_protocol
+    cidr_blocks = [var.sg.ingress2_cidr_blocks]
+  }
+  ingress {
     from_port   = var.sg.ingress_port
     to_port     = var.sg.ingress_port
     protocol    = var.sg.ingress2_protocol

@@ -10,28 +10,28 @@ resource "aws_lb" "aws_northwell_alb" {
   }
 }
 
-resource "aws_lb_listener" "aws_northwell_alb_listener" {
-  load_balancer_arn = aws_lb.aws_northwell_alb.arn
-  port              = var.alb.port
-  protocol          = "HTTP"
-  default_action {
-    type             = "forward"
-    target_group_arn = aws_lb_target_group.northwell_targetgroup.arn
-  }
-}
-
 # resource "aws_lb_listener" "aws_northwell_alb_listener" {
 #   load_balancer_arn = aws_lb.aws_northwell_alb.arn
-#   port              = 443 
-#   protocol          = "HTTPS"
-#   ssl_policy        = "ELBSecurityPolicy-2016-08"
-
-#   certificate_arn = "arn:aws:acm:us-east-1:003718499156:certificate/bc08d896-ee6c-4792-b56d-c6549c0b911c"  # Replace with your ACM certificate ARN
-
+#   port              = var.alb.port
+#   protocol          = "HTTP"
 #   default_action {
-#     type = "fixed-response"
+#     type             = "forward"
+#     target_group_arn = aws_lb_target_group.northwell_targetgroup.arn
 #   }
 # }
+
+resource "aws_lb_listener" "aws_northwell_alb_listener" {
+  load_balancer_arn = aws_lb.aws_northwell_alb.arn
+  port              = 443 
+  protocol          = "HTTPS"
+  ssl_policy        = "ELBSecurityPolicy-2016-08"
+
+  certificate_arn = "arn:aws:acm:us-east-1:003718499156:certificate/bc08d896-ee6c-4792-b56d-c6549c0b911c"  # Replace with your ACM certificate ARN
+
+  default_action {
+    type = "fixed-response"
+  }
+}
 
 resource "aws_lb_target_group" "northwell_targetgroup" {
   name        = "${var.prefix}-${var.env}-Nginx-TG"
