@@ -19,12 +19,14 @@ sg = {
   ingress_port         = 80
   egress_port          = 0
 
+  ###https_port
+  https                = 443
   ###sb-admin
   ingress_port2        = 3000
   ###sb-server
-  ingress_port3       = 4000
+  ingress_port3        = 4000
   ###sb-server
-  ingress_port4       = 5000
+  ingress_port4        = 5000
 }
 
 # ######ECS
