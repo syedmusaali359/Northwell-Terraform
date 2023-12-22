@@ -93,3 +93,40 @@ resource "aws_lb_listener_rule" "admin_host_based_routing" {
     target_group_arn = aws_lb_target_group.northwell_admin_targetgroup.arn
   }
 }
+
+resource "aws_lb_target_group" "northwell_server_targetgroup" {
+  name        = "${var.prefix}-${var.env}-Server-TG"
+  target_type = "ip"
+  port        = var.alb.server_port
+  protocol    = "HTTP"
+  vpc_id      = var.vpc_id
+  health_check {
+    enabled             = var.alb.enabled
+    interval            = var.alb.interval
+    path                = var.alb.path
+    timeout             = var.alb.timeout
+    matcher             = var.alb.matcher
+    healthy_threshold   = var.alb.healthy_threshold
+    unhealthy_threshold = var.alb.unhealthy_threshold
+  }
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
+resource "aws_lb_listener_rule" "server_host_based_routing" {
+  listener_arn = aws_lb_listener.aws_northwell_alb_listener.arn
+  priority     = 3
+
+  condition {
+    host_header {
+      values = ["api-northwell.stickball.biz"]
+    }
+  }
+
+  action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.northwell_server_targetgroup.arn
+  }
+}

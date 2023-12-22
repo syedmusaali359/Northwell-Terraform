@@ -21,6 +21,8 @@ sg = {
 
   ###sb-admin
   ingress_port2        = 3000
+  ###sb-server
+  ingress_port3       = 3001
 }
 
 # ######ECS
@@ -38,7 +40,7 @@ ecs = {
 alb = {
   port                = 80
   admin_port          = 3000
-  server_port         = 3000
+  server_port         = 3001
   enabled             = true
   interval            = 300
   path                = "/"

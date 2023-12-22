@@ -7,9 +7,15 @@ resource "aws_security_group" "northwell-allow-tls" {
     protocol    = var.sg.ingress2_protocol
     cidr_blocks = [var.sg.ingress2_cidr_blocks]
   }
-   ingress {
+  ingress {
     from_port   = var.sg.ingress_port2
     to_port     = var.sg.ingress_port2
+    protocol    = var.sg.ingress2_protocol
+    cidr_blocks = [var.sg.ingress2_cidr_blocks]
+  }
+  ingress {
+    from_port   = var.sg.ingress_port3
+    to_port     = var.sg.ingress_port3
     protocol    = var.sg.ingress2_protocol
     cidr_blocks = [var.sg.ingress2_cidr_blocks]
   }
