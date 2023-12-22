@@ -10,8 +10,17 @@ resource "aws_lb" "aws_northwell_alb" {
   }
 }
 
+resource "aws_lb_listener" "aws_northwell_alb_listener" {
+  load_balancer_arn = aws_lb.aws_northwell_alb.arn
+  port              = var.alb.port
+  protocol          = "HTTP"
+  default_action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.northwell_targetgroup.arn
+  }
+}
 resource "aws_lb_target_group" "northwell_targetgroup" {
-  name        = "${var.prefix}-${var.env}-Alb-TG"
+  name        = "${var.prefix}-${var.env}-Nginx-TG"
   target_type = "ip"
   port        = var.alb.port
   protocol    = "HTTP"
@@ -30,15 +39,23 @@ resource "aws_lb_target_group" "northwell_targetgroup" {
     create_before_destroy = true
   }
 }
-resource "aws_lb_listener" "aws_northwell_alb_listener" {
-  load_balancer_arn = aws_lb.aws_northwell_alb.arn
-  port              = var.alb.port
-  protocol          = "HTTP"
-  default_action {
+
+resource "aws_lb_listener_rule" "host_based_routing" {
+  listener_arn = aws_lb_listener.aws_northwell_alb_listener.arn
+  priority     = 100
+
+  condition {
+    host_header {
+      values = ["nginx-northwell.stickball.biz"]
+    }
+  }
+
+  action {
     type             = "forward"
     target_group_arn = aws_lb_target_group.northwell_targetgroup.arn
   }
 }
+
 
 resource "aws_lb_target_group" "northwell_admin_targetgroup" {
   name        = "${var.prefix}-${var.env}-Admin-TG"
@@ -61,11 +78,17 @@ resource "aws_lb_target_group" "northwell_admin_targetgroup" {
   }
 }
 
-resource "aws_lb_listener" "aws_northwell_alb_admin_listener" {
-  load_balancer_arn = aws_lb.aws_northwell_alb.arn
-  port              = var.alb.admin_port
-  protocol          = "HTTP"
-  default_action {
+resource "aws_lb_listener_rule" "host_based_routing" {
+  listener_arn = aws_lb_listener.aws_northwell_alb_listener.arn
+  priority     = 100
+
+  condition {
+    host_header {
+      values = ["manage-northwell.stickball.biz"]
+    }
+  }
+
+  action {
     type             = "forward"
     target_group_arn = aws_lb_target_group.northwell_admin_targetgroup.arn
   }
