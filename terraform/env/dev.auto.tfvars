@@ -25,7 +25,7 @@ sg = {
 
 # ######ECS
 ecs = {
-  family        = "service"
+  family        = "nginx-service"
   image         = "nginx:latest"
   cpu           = 2048
   memory        = 4096
