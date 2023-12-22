@@ -15,8 +15,15 @@ resource "aws_lb_listener" "aws_northwell_alb_listener" {
   port              = var.alb.port
   protocol          = "HTTP"
   default_action {
-    type             = "forward"
-    target_group_arn = aws_lb_target_group.northwell_targetgroup.arn
+    # type             = "forward"
+    # target_group_arn = aws_lb_target_group.northwell_targetgroup.arn
+    type = "redirect"
+
+    redirect {
+      port        = "443"
+      protocol    = "HTTPS"
+      status_code = "HTTP_301"
+    }
   }
 }
 resource "aws_lb_target_group" "northwell_targetgroup" {
