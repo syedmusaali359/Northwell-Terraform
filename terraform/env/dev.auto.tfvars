@@ -43,7 +43,7 @@ ecs = {
 }
 #######ALB
 alb = {
-  port                = 80
+  port                = 443
   admin_port          = 3000
   server_port         = 4000
   client_port         = 5000

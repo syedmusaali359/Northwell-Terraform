@@ -27,7 +27,7 @@ resource "aws_lb_listener" "aws_northwell_alb_listener" {
   }
 }
 
-resource "aws_lb_listener" "aws_northwell_alb_listener" {
+resource "aws_lb_listener" "aws_northwell_alb_listener_https" {
   load_balancer_arn = aws_lb.aws_northwell_alb.arn
   port              = 443 
   protocol          = "HTTPS"
