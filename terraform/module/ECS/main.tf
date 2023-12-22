@@ -25,7 +25,7 @@ resource "aws_ecs_task_definition" "service" {
 resource "aws_ecs_service" "northwell_service" {
   launch_type = "FARGATE"
 
-  name            = "${var.prefix}-${var.env}-Service"
+  name            = "${var.prefix}-${var.env}-Nginx-Service"
   cluster         = aws_ecs_cluster.ecs_northwell_cluster.id
   task_definition = aws_ecs_task_definition.service.arn
   desired_count   = var.ecs.desired_count
